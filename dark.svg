@@ -1,0 +1,530 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="1180" height="610" viewBox="0 0 1180 610">
+  <defs>
+    <!-- ─── Fonts ─────────────────────────────────────────── -->
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&amp;family=Orbitron:wght@700&amp;display=swap');
+
+      text { font-family: 'Share Tech Mono', 'Courier New', monospace; }
+      .title { font-family: 'Orbitron', 'Share Tech Mono', monospace; }
+
+      /* logo morph */
+      .logo-frame { animation: logoSwap 9s steps(1,end) infinite; }
+
+      @keyframes logoSwap {
+        0%   { opacity: 1; }
+        16%  { opacity: 0; }
+        100% { opacity: 0; }
+      }
+
+      /* scanline overlay */
+      .scanlines { animation: scanPan 8s linear infinite; }
+      @keyframes scanPan { from { transform: translateY(-40px); } to { transform: translateY(0px); } }
+
+      /* LIVE badge pulse */
+      .live-dot { animation: livePulse 1.2s ease-in-out infinite alternate; }
+      @keyframes livePulse { from { opacity: 1; } to { opacity: 0.15; } }
+
+      /* glitch clip frames */
+      .glitch-a { animation: glA 6s infinite; }
+      .glitch-b { animation: glB 6s infinite; }
+      @keyframes glA {
+        0%,88%,100% { clip-path: none; transform: translate(0); }
+        90%          { clip-path: inset(20% 0 55% 0); transform: translate(-3px,2px); }
+        93%          { clip-path: inset(60% 0 10% 0); transform: translate(3px,-1px); }
+        96%          { clip-path: inset(40% 0 30% 0); transform: translate(-1px,3px); }
+      }
+      @keyframes glB {
+        0%,88%,100% { clip-path: none; transform: translate(0); opacity: 0; }
+        90%          { clip-path: inset(10% 0 70% 0); transform: translate(3px,-2px); opacity: 0.6; }
+        93%          { clip-path: inset(65% 0 5%  0); transform: translate(-3px,1px); opacity: 0.6; }
+        96%          { clip-path: inset(30% 0 40% 0); transform: translate(1px,-3px); opacity: 0.6; }
+      }
+
+      /* terminal cursor blink */
+      .cursor { animation: blink 1s step-end infinite; }
+      @keyframes blink { 50% { opacity: 0; } }
+
+      /* border glow */
+      .panel-glow { animation: panelGlow 3s ease-in-out infinite alternate; }
+      @keyframes panelGlow {
+        from { filter: drop-shadow(0 0 4px #22D3EE55); }
+        to   { filter: drop-shadow(0 0 14px #22D3EEaa); }
+      }
+
+      /* portrait frame glow */
+      .port-glow { animation: portGlow 3s ease-in-out infinite alternate; }
+      @keyframes portGlow {
+        from { filter: drop-shadow(0 0 6px #7C3AED66); }
+        to   { filter: drop-shadow(0 0 18px #7C3AEDcc); }
+      }
+
+      /* logo frame cycle – each frame 1.5 s, 6 frames = 9 s */
+      #lf0 { animation: lf0a 9s steps(1) infinite; }
+      #lf1 { animation: lf1a 9s steps(1) infinite; }
+      #lf2 { animation: lf2a 9s steps(1) infinite; }
+      #lf3 { animation: lf3a 9s steps(1) infinite; }
+      #lf4 { animation: lf4a 9s steps(1) infinite; }
+      #lf5 { animation: lf5a 9s steps(1) infinite; }
+      @keyframes lf0a { 0%,100%{opacity:1} 16.7%,83.4%{opacity:0} }
+      @keyframes lf1a { 0%,16.6%,100%{opacity:0} 16.7%,33.3%{opacity:1} 33.4%{opacity:0} }
+      @keyframes lf2a { 0%,33.3%,100%{opacity:0} 33.4%,50%{opacity:1} 50.1%{opacity:0} }
+      @keyframes lf3a { 0%,50%,100%{opacity:0} 50.1%,66.6%{opacity:1} 66.7%{opacity:0} }
+      @keyframes lf4a { 0%,66.6%,100%{opacity:0} 66.7%,83.3%{opacity:1} 83.4%{opacity:0} }
+      @keyframes lf5a { 0%,83.3%{opacity:0} 83.4%,100%{opacity:1} }
+
+      /* grid shimmer */
+      .grid-line { animation: gridShimmer 4s ease-in-out infinite alternate; }
+      @keyframes gridShimmer { from { opacity: 0.06; } to { opacity: 0.14; } }
+    </style>
+
+    <!-- ─── Gradients / Filters ─────────────────────────────── -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#0A101F"/>
+      <stop offset="100%" stop-color="#060C17"/>
+    </linearGradient>
+
+    <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#22D3EE"/>
+      <stop offset="100%" stop-color="#06B6D4"/>
+    </linearGradient>
+
+    <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#7C3AED"/>
+      <stop offset="100%" stop-color="#6D28D9"/>
+    </linearGradient>
+
+    <linearGradient id="greenGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%"   stop-color="#10B981"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+
+    <linearGradient id="portraitGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#101826" stop-opacity="0"/>
+      <stop offset="80%"  stop-color="#101826" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#101826" stop-opacity="0.9"/>
+    </linearGradient>
+
+    <filter id="glow-cyan">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    <filter id="glow-purple">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    <filter id="portrait-blur">
+      <feGaussianBlur stdDeviation="1"/>
+    </filter>
+
+    <!-- scanline pattern -->
+    <pattern id="scanPat" x="0" y="0" width="1" height="4" patternUnits="userSpaceOnUse">
+      <rect width="1" height="1" fill="#00000022"/>
+    </pattern>
+
+    <!-- grid pattern -->
+    <pattern id="gridPat" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#22D3EE" stroke-width="0.4"/>
+    </pattern>
+
+    <!-- corner chevron clip -->
+    <clipPath id="portraitClip">
+      <polygon points="20,0 280,0 280,540 260,560 0,560 0,20"/>
+    </clipPath>
+
+    <!-- center panel clip -->
+    <clipPath id="centerClip">
+      <rect x="0" y="0" width="340" height="540" rx="4"/>
+    </clipPath>
+  </defs>
+
+  <!-- ════════════════════════════════════════════════════════
+       BACKGROUND
+       ════════════════════════════════════════════════════════ -->
+  <rect width="1180" height="610" fill="url(#bgGrad)"/>
+
+  <!-- cyber grid -->
+  <rect width="1180" height="610" fill="url(#gridPat)" class="grid-line"/>
+
+  <!-- subtle vignette -->
+  <radialGradient id="vignette" cx="50%" cy="50%" r="70%">
+    <stop offset="0%"   stop-color="transparent"/>
+    <stop offset="100%" stop-color="#00000088"/>
+  </radialGradient>
+  <rect width="1180" height="610" fill="url(#vignette)"/>
+
+  <!-- top accent bar -->
+  <rect x="0" y="0" width="1180" height="2" fill="url(#cyanGrad)" opacity="0.8"/>
+  <!-- bottom accent bar -->
+  <rect x="0" y="608" width="1180" height="2" fill="url(#purpleGrad)" opacity="0.8"/>
+
+  <!-- ════════════════════════════════════════════════════════
+       LEFT PANEL — PORTRAIT
+       ════════════════════════════════════════════════════════ -->
+  <g transform="translate(30,25)">
+
+    <!-- panel bg -->
+    <rect width="290" height="562" rx="6" fill="#101826" stroke="#22D3EE" stroke-width="1" opacity="0.9" class="port-glow"/>
+
+    <!-- dithered portrait placeholder (stylised geometric avatar) -->
+    <g clip-path="url(#portraitClip)">
+      <!-- dark bg -->
+      <rect width="280" height="560" fill="#060C17"/>
+
+      <!-- dithered body silhouette using layered rectangles -->
+      <!-- shoulders -->
+      <rect x="40"  y="340" width="200" height="220" fill="#1a1a2e" opacity="0.9"/>
+      <!-- neck -->
+      <rect x="110" y="300" width="60"  height="60"  fill="#c8956c" opacity="0.85"/>
+      <!-- head oval -->
+      <ellipse cx="140" cy="240" rx="85" ry="95" fill="#c8956c" opacity="0.9"/>
+      <!-- hair -->
+      <ellipse cx="140" cy="165" rx="88" ry="65" fill="#1a0a00"/>
+      <ellipse cx="140" cy="155" rx="80" ry="55" fill="#2a1500"/>
+      <!-- hair highlight -->
+      <ellipse cx="115" cy="160" rx="45" ry="30" fill="#3d2000" opacity="0.7"/>
+      <!-- face shade -->
+      <ellipse cx="140" cy="250" rx="70" ry="75" fill="#d4a574" opacity="0.4"/>
+      <!-- eye left -->
+      <ellipse cx="110" cy="228" rx="12" ry="9" fill="#1a0a00"/>
+      <ellipse cx="112" cy="226" rx="3"  ry="3" fill="#ffffff" opacity="0.6"/>
+      <!-- eye right -->
+      <ellipse cx="168" cy="228" rx="12" ry="9" fill="#1a0a00"/>
+      <ellipse cx="170" cy="226" rx="3"  ry="3" fill="#ffffff" opacity="0.6"/>
+      <!-- eyebrows -->
+      <path d="M 96 213 Q 110 207 124 212" stroke="#1a0a00" stroke-width="3" fill="none"/>
+      <path d="M 154 212 Q 168 207 182 213" stroke="#1a0a00" stroke-width="3" fill="none"/>
+      <!-- nose -->
+      <path d="M 136 245 Q 130 265 140 270 Q 150 265 144 245" stroke="#a0704a" stroke-width="1.5" fill="none" opacity="0.7"/>
+      <!-- mouth -->
+      <path d="M 122 285 Q 140 297 158 285" stroke="#8a5030" stroke-width="2" fill="none"/>
+      <!-- jacket -->
+      <path d="M 40 400 L 80 340 L 140 360 L 200 340 L 240 400 L 280 560 L 0 560 Z" fill="#1e2a3a"/>
+      <!-- collar -->
+      <path d="M 100 340 L 140 380 L 180 340" stroke="#2a3a4a" stroke-width="2" fill="none"/>
+
+      <!-- scanline overlay (dithering effect) -->
+      <rect width="280" height="560" fill="url(#scanPat)" opacity="0.35"/>
+
+      <!-- cyan frame glitch lines -->
+      <line x1="0" y1="200" x2="280" y2="200" stroke="#22D3EE" stroke-width="0.5" opacity="0.3"/>
+      <line x1="0" y1="350" x2="280" y2="350" stroke="#22D3EE" stroke-width="0.5" opacity="0.2"/>
+
+      <!-- bottom gradient -->
+      <rect width="280" height="560" fill="url(#portraitGrad)"/>
+    </g>
+
+    <!-- GLITCH layer A -->
+    <g clip-path="url(#portraitClip)" class="glitch-a" opacity="0.5">
+      <rect width="280" height="560" fill="#22D3EE" opacity="0.08"/>
+    </g>
+    <!-- GLITCH layer B -->
+    <g clip-path="url(#portraitClip)" class="glitch-b">
+      <rect width="280" height="560" fill="#7C3AED" opacity="0.12"/>
+    </g>
+
+    <!-- corner brackets -->
+    <path d="M 4,20 L 4,4 L 20,4" stroke="#22D3EE" stroke-width="1.5" fill="none" opacity="0.9"/>
+    <path d="M 286,20 L 286,4 L 270,4" stroke="#22D3EE" stroke-width="1.5" fill="none" opacity="0.9"/>
+    <path d="M 4,542 L 4,558 L 20,558" stroke="#22D3EE" stroke-width="1.5" fill="none" opacity="0.9"/>
+    <path d="M 286,542 L 286,558 L 270,558" stroke="#22D3EE" stroke-width="1.5" fill="none" opacity="0.9"/>
+
+    <!-- name tag at bottom -->
+    <rect x="30" y="510" width="230" height="38" rx="3" fill="#0A101F" stroke="#22D3EE" stroke-width="0.8" opacity="0.9"/>
+    <text x="145" y="525" text-anchor="middle" fill="#22D3EE" font-size="10" opacity="0.7">SUBJECT.ID</text>
+    <text x="145" y="542" text-anchor="middle" fill="#F8FAFC" font-size="13" font-weight="bold" class="title">SHAURYA SHARMA</text>
+
+    <!-- pixel indicator dots -->
+    <circle cx="16" cy="16" r="3" fill="#10B981"/>
+    <circle cx="275" cy="16" r="3" fill="#22D3EE" class="live-dot"/>
+  </g>
+
+  <!-- ════════════════════════════════════════════════════════
+       CENTER PANEL — LOGO MORPH
+       ════════════════════════════════════════════════════════ -->
+  <g transform="translate(370,25)">
+
+    <!-- panel bg -->
+    <rect width="340" height="562" rx="6" fill="#101826" stroke="#7C3AED" stroke-width="1" opacity="0.9" class="panel-glow"/>
+
+    <!-- top label -->
+    <rect x="80" y="16" width="180" height="24" rx="3" fill="#7C3AED" opacity="0.2"/>
+    <text x="170" y="32" text-anchor="middle" fill="#7C3AED" font-size="11">TECH.STACK :: ACTIVE</text>
+
+    <!-- centre logo display area -->
+    <rect x="30" y="55" width="280" height="280" rx="6" fill="#060C17" stroke="#7C3AED" stroke-width="0.8" opacity="0.6"/>
+
+    <!-- ── Logo Frame 0: PyTorch ── -->
+    <g id="lf0" transform="translate(170,195)">
+      <!-- PyTorch flame icon simplified -->
+      <circle cx="0" cy="0" r="70" fill="#EE4C2C" opacity="0.12"/>
+      <path d="M 0,-55 C 20,-40 35,-10 20,15 C 10,32 -10,32 -18,18 C -28,0 -5,-15 5,-30 C -5,-50 -15,-45 -10,-55 C -5,-60 5,-58 0,-55 Z" fill="#EE4C2C" opacity="0.85"/>
+      <circle cx="18" cy="22" r="8" fill="#ffffff" opacity="0.8"/>
+      <text x="0" y="75" text-anchor="middle" fill="#EE4C2C" font-size="16" font-weight="bold" class="title">PyTorch</text>
+      <text x="0" y="92" text-anchor="middle" fill="#94A3B8" font-size="10">Deep Learning Framework</text>
+    </g>
+
+    <!-- ── Logo Frame 1: NVIDIA ── -->
+    <g id="lf1" transform="translate(170,195)" opacity="0">
+      <circle cx="0" cy="0" r="70" fill="#76B900" opacity="0.12"/>
+      <!-- NVIDIA eye icon -->
+      <path d="M -50,0 Q -20,-35 0,-38 Q 25,-40 50,0 Q 25,35 0,38 Q -20,35 -50,0 Z" fill="none" stroke="#76B900" stroke-width="2.5" opacity="0.8"/>
+      <circle cx="0" cy="0" r="22" fill="#76B900" opacity="0.9"/>
+      <circle cx="0" cy="0" r="10" fill="#060C17"/>
+      <text x="0" y="75" text-anchor="middle" fill="#76B900" font-size="16" font-weight="bold" class="title">NVIDIA</text>
+      <text x="0" y="92" text-anchor="middle" fill="#94A3B8" font-size="10">GPU-Accelerated Computing</text>
+    </g>
+
+    <!-- ── Logo Frame 2: Kubernetes ── -->
+    <g id="lf2" transform="translate(170,195)" opacity="0">
+      <circle cx="0" cy="0" r="70" fill="#326CE5" opacity="0.12"/>
+      <!-- k8s wheel -->
+      <circle cx="0" cy="0" r="50" fill="none" stroke="#326CE5" stroke-width="2" opacity="0.5"/>
+      <circle cx="0" cy="0" r="18" fill="#326CE5" opacity="0.9"/>
+      <!-- spokes -->
+      <line x1="0" y1="-18" x2="0"  y2="-50" stroke="#326CE5" stroke-width="3" opacity="0.8"/>
+      <line x1="0" y1="18"  x2="0"  y2="50"  stroke="#326CE5" stroke-width="3" opacity="0.8"/>
+      <line x1="-18" y1="0" x2="-50" y2="0" stroke="#326CE5" stroke-width="3" opacity="0.8"/>
+      <line x1="18" y1="0"  x2="50" y2="0"  stroke="#326CE5" stroke-width="3" opacity="0.8"/>
+      <line x1="-13" y1="-13" x2="-36" y2="-36" stroke="#326CE5" stroke-width="3" opacity="0.8"/>
+      <line x1="13"  y1="-13" x2="36"  y2="-36" stroke="#326CE5" stroke-width="3" opacity="0.8"/>
+      <line x1="-13" y1="13"  x2="-36" y2="36"  stroke="#326CE5" stroke-width="3" opacity="0.8"/>
+      <line x1="13"  y1="13"  x2="36"  y2="36"  stroke="#326CE5" stroke-width="3" opacity="0.8"/>
+      <text x="0" y="75" text-anchor="middle" fill="#326CE5" font-size="16" font-weight="bold" class="title">Kubernetes</text>
+      <text x="0" y="92" text-anchor="middle" fill="#94A3B8" font-size="10">Container Orchestration</text>
+    </g>
+
+    <!-- ── Logo Frame 3: FastAPI ── -->
+    <g id="lf3" transform="translate(170,195)" opacity="0">
+      <circle cx="0" cy="0" r="70" fill="#009688" opacity="0.12"/>
+      <!-- lightning bolt -->
+      <path d="M 15,-55 L -20,5 L 10,5 L -15,55 L 22,-8 L -8,-8 Z" fill="#009688" opacity="0.9"/>
+      <text x="0" y="75" text-anchor="middle" fill="#009688" font-size="16" font-weight="bold" class="title">FastAPI</text>
+      <text x="0" y="92" text-anchor="middle" fill="#94A3B8" font-size="10">High-Performance Backend</text>
+    </g>
+
+    <!-- ── Logo Frame 4: LangChain ── -->
+    <g id="lf4" transform="translate(170,195)" opacity="0">
+      <circle cx="0" cy="0" r="70" fill="#1C3D5A" opacity="0.2"/>
+      <!-- chain links -->
+      <rect x="-45" y="-14" width="36" height="28" rx="14" fill="none" stroke="#22D3EE" stroke-width="3" opacity="0.9"/>
+      <rect x="9"   y="-14" width="36" height="28" rx="14" fill="none" stroke="#22D3EE" stroke-width="3" opacity="0.9"/>
+      <rect x="-18" y="-14" width="36" height="28" rx="14" fill="none" stroke="#7C3AED" stroke-width="3" opacity="0.9"/>
+      <text x="0" y="75" text-anchor="middle" fill="#22D3EE" font-size="16" font-weight="bold" class="title">LangChain</text>
+      <text x="0" y="92" text-anchor="middle" fill="#94A3B8" font-size="10">LLM Application Framework</text>
+    </g>
+
+    <!-- ── Logo Frame 5: Docker ── -->
+    <g id="lf5" transform="translate(170,195)" opacity="0">
+      <circle cx="0" cy="0" r="70" fill="#2496ED" opacity="0.12"/>
+      <!-- docker whale simplified -->
+      <rect x="-40" y="-10" width="80" height="28" rx="14" fill="#2496ED" opacity="0.85"/>
+      <!-- containers on whale -->
+      <rect x="-35" y="-26" width="18" height="15" rx="2" fill="#2496ED" opacity="0.7"/>
+      <rect x="-12" y="-26" width="18" height="15" rx="2" fill="#2496ED" opacity="0.7"/>
+      <rect x="11"  y="-26" width="18" height="15" rx="2" fill="#2496ED" opacity="0.7"/>
+      <rect x="-35" y="-44" width="18" height="15" rx="2" fill="#2496ED" opacity="0.5"/>
+      <rect x="-12" y="-44" width="18" height="15" rx="2" fill="#2496ED" opacity="0.5"/>
+      <text x="0" y="75" text-anchor="middle" fill="#2496ED" font-size="16" font-weight="bold" class="title">Docker</text>
+      <text x="0" y="92" text-anchor="middle" fill="#94A3B8" font-size="10">Container Platform</text>
+    </g>
+
+    <!-- progress bar -->
+    <rect x="30" y="350" width="280" height="4" rx="2" fill="#0A101F"/>
+    <rect x="30" y="350" width="280" height="4" rx="2" fill="url(#purpleGrad)" opacity="0.8">
+      <animate attributeName="width" values="0;280;0" dur="9s" repeatCount="indefinite"/>
+    </rect>
+
+    <!-- skill badges grid -->
+    <g transform="translate(30,368)">
+      <rect width="280" height="168" rx="4" fill="#060C17" opacity="0.5"/>
+
+      <!-- row 1 -->
+      <rect x="8"   y="10" width="80" height="22" rx="11" fill="#EE4C2C" opacity="0.15"/>
+      <text x="48"  y="25" text-anchor="middle" fill="#EE4C2C" font-size="10">● PyTorch</text>
+      <rect x="96"  y="10" width="80" height="22" rx="11" fill="#76B900" opacity="0.15"/>
+      <text x="136" y="25" text-anchor="middle" fill="#76B900" font-size="10">● TensorFlow</text>
+      <rect x="184" y="10" width="88" height="22" rx="11" fill="#FF6F00" opacity="0.15"/>
+      <text x="228" y="25" text-anchor="middle" fill="#FF6F00" font-size="10">● Transformers</text>
+
+      <!-- row 2 -->
+      <rect x="8"   y="40" width="80" height="22" rx="11" fill="#22D3EE" opacity="0.15"/>
+      <text x="48"  y="55" text-anchor="middle" fill="#22D3EE" font-size="10">● LangChain</text>
+      <rect x="96"  y="40" width="80" height="22" rx="11" fill="#7C3AED" opacity="0.15"/>
+      <text x="136" y="55" text-anchor="middle" fill="#7C3AED" font-size="10">● LangGraph</text>
+      <rect x="184" y="40" width="88" height="22" rx="11" fill="#10B981" opacity="0.15"/>
+      <text x="228" y="55" text-anchor="middle" fill="#10B981" font-size="10">● CrewAI</text>
+
+      <!-- row 3 -->
+      <rect x="8"   y="70" width="80" height="22" rx="11" fill="#009688" opacity="0.15"/>
+      <text x="48"  y="85" text-anchor="middle" fill="#009688" font-size="10">● FastAPI</text>
+      <rect x="96"  y="70" width="80" height="22" rx="11" fill="#2496ED" opacity="0.15"/>
+      <text x="136" y="85" text-anchor="middle" fill="#2496ED" font-size="10">● Docker</text>
+      <rect x="184" y="70" width="88" height="22" rx="11" fill="#326CE5" opacity="0.15"/>
+      <text x="228" y="85" text-anchor="middle" fill="#326CE5" font-size="10">● Kubernetes</text>
+
+      <!-- row 4 -->
+      <rect x="8"   y="100" width="80" height="22" rx="11" fill="#FF9900" opacity="0.15"/>
+      <text x="48"  y="115" text-anchor="middle" fill="#FF9900" font-size="10">● AWS</text>
+      <rect x="96"  y="100" width="80" height="22" rx="11" fill="#008AD7" opacity="0.15"/>
+      <text x="136" y="115" text-anchor="middle" fill="#008AD7" font-size="10">● Azure</text>
+      <rect x="184" y="100" width="88" height="22" rx="11" fill="#4285F4" opacity="0.15"/>
+      <text x="228" y="115" text-anchor="middle" fill="#4285F4" font-size="10">● GCP</text>
+
+      <!-- row 5 -->
+      <rect x="8"   y="130" width="80" height="22" rx="11" fill="#336791" opacity="0.15"/>
+      <text x="48"  y="145" text-anchor="middle" fill="#336791" font-size="10">● PostgreSQL</text>
+      <rect x="96"  y="130" width="80" height="22" rx="11" fill="#47A248" opacity="0.15"/>
+      <text x="136" y="145" text-anchor="middle" fill="#47A248" font-size="10">● MongoDB</text>
+      <rect x="184" y="130" width="88" height="22" rx="11" fill="#DC382D" opacity="0.15"/>
+      <text x="228" y="145" text-anchor="middle" fill="#DC382D" font-size="10">● Redis</text>
+    </g>
+
+    <!-- corner brackets -->
+    <path d="M 4,20 L 4,4 L 20,4" stroke="#7C3AED" stroke-width="1.5" fill="none" opacity="0.9"/>
+    <path d="M 336,20 L 336,4 L 320,4" stroke="#7C3AED" stroke-width="1.5" fill="none" opacity="0.9"/>
+    <path d="M 4,542 L 4,558 L 20,558" stroke="#7C3AED" stroke-width="1.5" fill="none" opacity="0.9"/>
+    <path d="M 336,542 L 336,558 L 320,558" stroke="#7C3AED" stroke-width="1.5" fill="none" opacity="0.9"/>
+  </g>
+
+  <!-- ════════════════════════════════════════════════════════
+       RIGHT PANEL — SYSTEM.INFO TERMINAL
+       ════════════════════════════════════════════════════════ -->
+  <g transform="translate(760,25)">
+
+    <!-- panel bg -->
+    <rect width="390" height="562" rx="6" fill="#101826" stroke="#22D3EE" stroke-width="1" opacity="0.9" class="panel-glow"/>
+
+    <!-- terminal title bar -->
+    <rect width="390" height="38" rx="6" fill="#060C17"/>
+    <rect x="0" y="20" width="390" height="18" fill="#060C17"/>
+    <!-- traffic lights -->
+    <circle cx="18" cy="19" r="5" fill="#EF4444"/>
+    <circle cx="34" cy="19" r="5" fill="#F59E0B"/>
+    <circle cx="50" cy="19" r="5" fill="#10B981"/>
+    <!-- title -->
+    <text x="195" y="23" text-anchor="middle" fill="#94A3B8" font-size="11">SYSTEM.INFO // v2.4.1</text>
+
+    <!-- LIVE badge -->
+    <g transform="translate(335,10)">
+      <rect width="46" height="18" rx="9" fill="#EF4444" opacity="0.2"/>
+      <rect width="46" height="18" rx="9" fill="none" stroke="#EF4444" stroke-width="0.8"/>
+      <circle cx="11" cy="9" r="4" fill="#EF4444" class="live-dot"/>
+      <text x="25" y="13" text-anchor="middle" fill="#EF4444" font-size="9" font-weight="bold">LIVE</text>
+    </g>
+
+    <!-- divider line -->
+    <line x1="0" y1="38" x2="390" y2="38" stroke="#22D3EE" stroke-width="0.5" opacity="0.4"/>
+
+    <!-- terminal content -->
+    <g transform="translate(14,58)" font-size="11.5" fill="#F8FAFC">
+
+      <!-- prompt line -->
+      <text y="0" fill="#10B981">root@nexus</text>
+      <text x="72" y="0" fill="#94A3B8">:</text>
+      <text x="80" y="0" fill="#22D3EE">~/profile</text>
+      <text x="148" y="0" fill="#F8FAFC">$ cat system.info</text>
+
+      <!-- blank -->
+      <text y="18" fill="#94A3B8" opacity="0.5">──────────────────────────────────────────</text>
+
+      <!-- info lines -->
+      <text y="38"  fill="#7C3AED">Subject</text>
+      <text x="90"  y="38"  fill="#94A3B8">........</text>
+      <text x="165" y="38"  fill="#F8FAFC">Shaurya Sharma</text>
+
+      <text y="57"  fill="#7C3AED">Role</text>
+      <text x="90"  y="57"  fill="#94A3B8">...........</text>
+      <text x="165" y="57"  fill="#22D3EE">AI/ML Engineer</text>
+
+      <text y="76"  fill="#7C3AED">Education</text>
+      <text x="90"  y="76"  fill="#94A3B8">......</text>
+      <text x="165" y="76"  fill="#F8FAFC">Automation &amp; Robotics</text>
+
+      <text y="95"  fill="#7C3AED">Location</text>
+      <text x="90"  y="95"  fill="#94A3B8">.......</text>
+      <text x="165" y="95"  fill="#F8FAFC">India 🇮🇳</text>
+
+      <text y="114" fill="#7C3AED">Status</text>
+      <text x="90"  y="114" fill="#94A3B8">.........</text>
+      <text x="165" y="114" fill="#10B981">Building Agentic AI</text>
+
+      <text y="133" fill="#94A3B8" opacity="0.5">──────────────────────────────────────────</text>
+
+      <text y="152" fill="#7C3AED">Languages</text>
+      <text x="90"  y="152" fill="#94A3B8">......</text>
+      <text x="165" y="152" fill="#F8FAFC">Python • C++ • SQL</text>
+
+      <text y="171" fill="#7C3AED">AI/ML</text>
+      <text x="90"  y="171" fill="#94A3B8">.........</text>
+      <text x="165" y="171" fill="#F8FAFC">PyTorch • TensorFlow</text>
+
+      <text y="190" fill="#7C3AED">Agents</text>
+      <text x="90"  y="190" fill="#94A3B8">.........</text>
+      <text x="165" y="190" fill="#22D3EE">LangGraph • CrewAI</text>
+      <text x="165" y="206" fill="#22D3EE">AutoGen</text>
+
+      <text y="224" fill="#7C3AED">Backend</text>
+      <text x="90"  y="224" fill="#94A3B8">........</text>
+      <text x="165" y="224" fill="#F8FAFC">FastAPI • REST • gRPC</text>
+
+      <text y="243" fill="#7C3AED">Database</text>
+      <text x="90"  y="243" fill="#94A3B8">.......</text>
+      <text x="165" y="243" fill="#F8FAFC">PostgreSQL • MongoDB</text>
+      <text x="165" y="259" fill="#F8FAFC">FAISS • Redis</text>
+
+      <text y="277" fill="#7C3AED">Cloud</text>
+      <text x="90"  y="277" fill="#94A3B8">.........</text>
+      <text x="165" y="277" fill="#F8FAFC">AWS • Azure • GCP</text>
+
+      <text y="296" fill="#7C3AED">Infra</text>
+      <text x="90"  y="296" fill="#94A3B8">.........</text>
+      <text x="165" y="296" fill="#F8FAFC">Docker • K8s • Terraform</text>
+
+      <text y="315" fill="#94A3B8" opacity="0.5">──────────────────────────────────────────</text>
+
+      <text y="334" fill="#7C3AED">Projects</text>
+      <text x="90"  y="334" fill="#94A3B8">.......</text>
+      <text x="165" y="334" fill="#10B981">NexusSwarm</text>
+      <text x="165" y="350" fill="#10B981">InfraMind AI</text>
+
+      <text y="368" fill="#7C3AED">Research</text>
+      <text x="90"  y="368" fill="#94A3B8">.......</text>
+      <text x="165" y="368" fill="#F8FAFC">Healthcare AI</text>
+      <text x="165" y="384" fill="#F8FAFC">Hindu Philosophy AI</text>
+
+      <text y="402" fill="#94A3B8" opacity="0.5">──────────────────────────────────────────</text>
+
+      <text y="421" fill="#7C3AED">Portfolio</text>
+      <text x="90"  y="421" fill="#94A3B8">......</text>
+      <text x="165" y="421" fill="#22D3EE" text-decoration="underline">shaurya-beta.vercel.app</text>
+
+      <text y="440" fill="#7C3AED">GitHub</text>
+      <text x="90"  y="440" fill="#94A3B8">.........</text>
+      <text x="165" y="440" fill="#22D3EE">@theshauryas1</text>
+
+      <!-- prompt with cursor -->
+      <text y="465" fill="#10B981">root@nexus</text>
+      <text x="72" y="465" fill="#94A3B8">:</text>
+      <text x="80" y="465" fill="#22D3EE">~/profile</text>
+      <text x="148" y="465" fill="#F8FAFC">$ </text>
+      <rect x="163" y="453" width="8" height="14" fill="#22D3EE" class="cursor"/>
+    </g>
+
+    <!-- corner brackets -->
+    <path d="M 4,20 L 4,4 L 20,4" stroke="#22D3EE" stroke-width="1.5" fill="none" opacity="0.9"/>
+    <path d="M 386,20 L 386,4 L 370,4" stroke="#22D3EE" stroke-width="1.5" fill="none" opacity="0.9"/>
+    <path d="M 4,542 L 4,558 L 20,558" stroke="#22D3EE" stroke-width="1.5" fill="none" opacity="0.9"/>
+    <path d="M 386,542 L 386,558 L 370,558" stroke="#22D3EE" stroke-width="1.5" fill="none" opacity="0.9"/>
+  </g>
+
+  <!-- ════════════════════════════════════════════════════════
+       BOTTOM STATUS BAR
+       ════════════════════════════════════════════════════════ -->
+  <g transform="translate(30,600)">
+    <text x="0"   y="0" fill="#94A3B8" font-size="10">[ AI/ML ENGINEER ]</text>
+    <text x="200" y="0" fill="#22D3EE"  font-size="10">● OPEN TO OPPORTUNITIES</text>
+    <text x="500" y="0" fill="#94A3B8"  font-size="10">theshauryas1 :: India</text>
+    <text x="900" y="0" fill="#7C3AED"  font-size="10">NEXUSSWARM // INFRAMIND AI</text>
+  </g>
+</svg>
